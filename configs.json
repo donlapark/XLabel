@@ -1,0 +1,10 @@
+{
+    "db_filename": "None",
+    "sidebar": {
+        "num_labels": 4,
+        "relabel": "Yes",
+        "mode": "Fixed sample size",
+        "n_samples": 50,
+        "threshold": 0.95
+    }
+}
