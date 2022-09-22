@@ -131,8 +131,7 @@ def init_state_params():
           labels are added to the database, compute_unlabeled_index()
           needs to be called to track the changes.
     """
-
-    if _state.uploaded_files != "None":
+    if _state.uploaded_files is not None:
         _state.configs["db_filename"] = _state.uploaded_files.name
 
     filename = _state.configs["db_filename"]
@@ -206,7 +205,7 @@ def compute_unlabeled_index(new_labeled_index=None, label=None):
 def create_config_file():
     """Create a new config file"""
     _state["configs"] = {
-        "db_filename": None,
+        "db_filename": "None",
         "sidebar": {
             "num_labels": 1,
             "relabel": "Yes",
