@@ -17,7 +17,7 @@ import streamlit as st
 from streamlit import session_state as _state
 import streamlit.components.v1 as components
 
-from model.ebmclassifier import ExplainableBoostingClassifier
+from ebmclassifier import ExplainableBoostingClassifier
 
 _PERSIST_STATE_KEY = f"{__name__}_PERSIST"
 _CONFIGS_FILE = "configs.json"
@@ -104,6 +104,18 @@ def main():
 
         label = _state.label_page
         display_main_screen(label)
+
+    filename = _state.configs["db_filename"]
+    file_pre, file_ext = os.path.splitext(filename)
+    if "database" in _state:
+        data, mime = convert_to_downloadable(_state.database, file_ext)
+
+        st.sidebar.download_button(
+            label="Download labeled data",
+            data=data,
+            file_name=filename,
+            mime=mime
+        )
 
 
 def update_file():
@@ -244,7 +256,30 @@ def create_config_file():
     with open(_CONFIGS_FILE, "w") as _file:
         json.dump(_state.configs, _file, indent=4)
 
+
+@st.experimental_memo
+def convert_to_downloadable(data, file_type):
+    """Convert a dataframe to a downloadable format
+
+    Args:
+    data: A Pandas DataFrame.
+    file_type: A target format for the conversion: ".csv", ".xls" or ".xlsx".
+
+    Returns:
+    converted_data: Data converted to the specified format.
+    """
+    if file_type == ".csv":
+        converted_data = data.to_csv().encode('utf-8')
+        mime = "text/csv"
+    elif (file_type == ".xlsx") or (file_type == ".xls"):
+        converted_data = data.to_excel().encode('utf-8')
+        mime = "application/vnd.ms-excel"
+    else:
+        raise ValueError("file_type must be \"csv\" or \"excel\"")
         
+    return converted_data, mime
+
+
 def display_main_screen(label):
     """Display predictions and heatmaps on the main screen.
 
@@ -469,7 +504,7 @@ def sample_and_predict():
             create_pages()
 
     X = _state.database.iloc[:, :-_state.num_labels]
-
+ 
     _state.local_results = dict.fromkeys(_state.pages)
 
     for label in _state.pages:
@@ -515,13 +550,6 @@ def update_and_save(label):
     else:
         labeled_index = _state.database.index.difference(_state.unlabeled_index[label])
 
-    filename = _state.configs["db_filename"]
-    file_pre, file_ext = os.path.splitext(filename)
-    if file_ext == ".csv":
-        _state.database.to_csv(filename)
-    elif (file_ext == ".xlsx") or (file_ext == ".xls"):
-        _state.database.to_excel(filename)
-
     X = _state.database.iloc[:, :-_state.num_labels]
     X_train = X.loc[labeled_index, :]
     ytrain = _state.database.loc[labeled_index, label]
@@ -529,6 +557,8 @@ def update_and_save(label):
     ebm.fit(X_train, ytrain.map(_state.class_to_num[label]))
     _state.models[label] = ebm
 
+    filename = _state.configs["db_filename"]
+    file_pre, file_ext = os.path.splitext(filename)
     with open(file_pre+str(_state.num_labels)+_MODEL
               , 'wb') as _file:
         pkle.dump(_state.models, _file, protocol=pkle.HIGHEST_PROTOCOL)
