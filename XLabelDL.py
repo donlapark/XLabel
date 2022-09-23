@@ -245,12 +245,14 @@ def initialize_models():
     to initialize the models.
     """
     models = {}
+    models_params = {}
     for label in _state.pages:
         y = _state.database[label].dropna().map(_state.class_to_num[label])
         X = _state.database.loc[y.index, :].iloc[:, :-_state.num_labels]
         models[label] = ExplainableBoostingClassifier().fit(X,y)
+        models_params[label] = models[label].__dict__
 
-    return models
+    return models, models_params
 
 
 def compute_unlabeled_index(new_labeled_index=None, label=None):
