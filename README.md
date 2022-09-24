@@ -3,4 +3,6 @@
 ![License](https://img.shields.io/github/license/donlapark/XLabel)
 ![Maintenance](https://img.shields.io/maintenance/yes/2022)
 
-XLabel: An Explainable Data Labeling Assistant
+XLabel is an open-source [Streamlit](https://streamlit.io/) app that takes an explainable machine learning approach to data labeling. 
+
+![Screenshot](screenshot/XLabel_screenshot.png)
