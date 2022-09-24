@@ -8,6 +8,6 @@
 
 XLabel (e**X**plainable **Label**ing Assistant) is an open-source [Streamlit](https://streamlit.io/) app that takes an explainable machine learning approach to data labeling.
 
-
+You can try out the app at **Hugging Face demo**: [![Huggingface Streamlit](https://img.shields.io/static/v1?label=Demo&message=Huggingface%20Streamlit&color=red)](https://huggingface.co/spaces/Donlapark/XLabel))
 
 ![Screenshot](screenshot/XLabel_screenshot.png)
