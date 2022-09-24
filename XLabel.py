@@ -10,8 +10,6 @@ import math
 import os
 import pickle as pkle
 
-from typing import DefaultDict
-
 from interpret.privacy import (DPExplainableBoostingClassifier,
                                DPExplainableBoostingRegressor)
 from interpret.utils import gen_perf_dicts
@@ -62,7 +60,7 @@ def main():
             create_config_file()
 
         _state["loaded_new_file"] = True
-    
+
     st.sidebar.write("Current database: " + _state.configs["db_filename"])
 
     st.sidebar.file_uploader(
@@ -72,7 +70,7 @@ def main():
         accept_multiple_files=False,
         on_change=update_file
         )
-    
+
     with st.sidebar.form("sidebar"):
         st.slider(
             "Number of labels",
@@ -277,7 +275,7 @@ def create_config_file():
     with open(_CONFIGS_FILE, "w") as _file:
         json.dump(_state.configs, _file, indent=4)
 
-        
+
 def display_main_screen(label):
     """Display predictions and heatmaps on the main screen.
 
@@ -395,8 +393,8 @@ def plot_all_features(data, title, height, num_rows):
     ).configure_title(fontSize=16)
 
     return obj
-                        
-                         
+
+
 def plot(data, title, height):
     """Plot each row of the heatmap of EBM's per-instance explanation.
 
@@ -490,7 +488,7 @@ def sample_and_predict():
     the predictions and explanations in a dictionary.
     """
     st.experimental_memo.clear()
-    
+
     if _state.loaded_new_file:
         init_state_params()
         _state.loaded_new_file = False

@@ -10,8 +10,6 @@ import math
 import os
 import pickle as pkle
 
-from typing import DefaultDict
-
 from interpret.privacy import (DPExplainableBoostingClassifier,
                                DPExplainableBoostingRegressor)
 from interpret.utils import gen_perf_dicts
@@ -62,7 +60,7 @@ def main():
             create_config_file()
 
         _state["loaded_new_file"] = True
-    
+
     st.sidebar.write("Current database: " + _state.configs["db_filename"])
 
     st.sidebar.file_uploader(
@@ -72,7 +70,7 @@ def main():
         accept_multiple_files=False,
         on_change=update_file
         )
-    
+
     with st.sidebar.form("sidebar"):
         st.slider(
             "Number of labels",
@@ -305,7 +303,7 @@ def convert_to_downloadable(data, file_type):
         mime = "application/vnd.ms-excel"
     else:
         raise ValueError("file_type must be \"csv\" or \"excel\"")
-        
+
     return converted_data, mime
 
 
@@ -426,8 +424,8 @@ def plot_all_features(data, title, height, num_rows):
     ).configure_title(fontSize=16)
 
     return obj
-                        
-                         
+
+
 def plot(data, title, height):
     """Plot each row of the heatmap of EBM's per-instance explanation.
 
@@ -521,7 +519,7 @@ def sample_and_predict():
     the predictions and explanations in a dictionary.
     """
     st.experimental_memo.clear()
-    
+
     if _state.loaded_new_file:
         init_state_params()
         _state.loaded_new_file = False
@@ -533,7 +531,7 @@ def sample_and_predict():
             create_pages()
 
     X = _state.database.iloc[:, :-_state.num_labels]
- 
+
     _state.local_results = dict.fromkeys(_state.pages)
 
     for label in _state.pages:
@@ -842,7 +840,7 @@ class BaseEBM(BaseEstimator):
             training_eps_ = self.epsilon - bin_eps_
             bin_delta_ = self.delta / 2
             training_delta_ = self.delta / 2
-            
+
              # [DP] Calculate how much noise will be applied to each iteration of the algorithm
             if self.composition == 'classic':
                 self.noise_scale_ = DPUtils.calc_classic_noise_multi(
