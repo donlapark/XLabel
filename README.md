@@ -6,13 +6,13 @@
 [![CodeQL](https://github.com/donlapark/XLabel/actions/workflows/codeql.yml/badge.svg)](https://github.com/donlapark/XLabel/actions/workflows/codeql.yml)
 ![Maintenance](https://img.shields.io/maintenance/yes/2022)
 
-XLabel is an open-source [Streamlit](https://streamlit.io/) app that takes an explainable machine learning approach to data labeling.
+XLabel is an open-source [Streamlit](https://streamlit.io/) app that takes an explainable machine learning approach to visual-interactive data labeling.
 
 Try out the app at [<ins>Hugging Face Demo</ins>](https://huggingface.co/spaces/Donlapark/XLabel).
 
 ## Features
 XLabel can:
-* Predict the most probable labels using Explainable Boosting Machine (EBM) [1].
+* Predict the most probable labels using Explainable Boosting Machine (EBM) [[1]](#1).
 * Show the contributions of each feature towards the predicted labels.
 * Provide an option to write the labels directly into the data file (use `XLabel.py`) or save them in a separate file (use `XLabelDL.py`)
 * Work on data mith multiple labels and multiple classes.
@@ -52,7 +52,7 @@ With your data file satisfying these conditions, you can now start data labeling
     * If you are using `XLabelDL.py`, you need to click the `Download labeled data` in the sidebar to download the labeled data as a new file.
 
 ## Citations
-1. "InterpretML: A Unified Framework for Machine Learning Interpretability" (H. Nori, S. Jenkins, P. Koch, and R. Caruana 2019)
+<a id="1">[1]</a> "InterpretML: A Unified Framework for Machine Learning Interpretability" (H. Nori, S. Jenkins, P. Koch, and R. Caruana 2019)
     ```
     @article{nori2019interpretml,
       title={InterpretML: A Unified Framework for Machine Learning Interpretability},
