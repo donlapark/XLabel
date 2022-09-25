@@ -34,7 +34,7 @@ Before using XLabel, the data file must follow the following tabular convention:
 * The file must be in either CSV or Excel format.
 * The first row of the file must be the names of the columns.
 * The first column must contain a unique identifier (id) for each row.
-* The columns of the labels must appear last in the sequence of columns.
+* The label columns must appear last.
 
 With your data file following these conditions, you can now start data labeling with XLabel!
 1. Copy `XLabel.py` to the directory that contains the data file and run the `streamlit` command:
