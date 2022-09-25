@@ -11,7 +11,7 @@ XLabel (e**X**plainable **Label**ing Assistant) is an open-source [Streamlit](ht
 Try out the app at [<ins>Hugging Face Demo</ins>](https://huggingface.co/spaces/Donlapark/XLabel)
 
 ## Features
-* Predict the most probable labels with Explainable Boosting Machine (EBM).
+* Predict the most probable labels with Explainable Boosting Machine (EBM) [1].
 * User chooses the options and then click the "**Sample**" button to shows the predicted labels.
 * Show the contributions of each feature towards the predicted labels.
 * Option to write the labels directly into the data file (use `XLabel.py`) or save them in a separate file (use `XLabelDL.py`)
