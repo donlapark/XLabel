@@ -17,7 +17,7 @@ Try out the app at [<ins>Hugging Face Demo</ins>](https://huggingface.co/spaces/
 * Option to write the labels directly into the data file (use `XLabel.py`) or save them in a separate file (use `XLabelDL.py`)
 * Applicable to data with missing values ([thanks to EBM](https://github.com/interpretml/interpret/issues/18)) and/or non-numeric categorical features.
 
-![Screenshot](screenshot/XLabel_screenshot.png)
+![Screenshot](screenshot/XLabel_screenshot.pdf)
 
 ## Installation
 All you need is installing the required packages.
