@@ -230,7 +230,7 @@ def create_pages():
                   , 'rb') as _file:
             _state["models"] = pkle.load(_file)
     except FileNotFoundError:
-        _state["models"] = initialize_models()
+        _state["models"], _state["models_params"] = initialize_models()
 
     compute_unlabeled_index()
 
@@ -246,11 +246,29 @@ def initialize_models():
     models_params = {}
     for label in _state.pages:
         y = _state.database[label].dropna().map(_state.class_to_num[label])
-        X = _state.database.loc[y.index, :].iloc[:, :-_state.num_labels]
+        X = subset_features(_state.database, label)
+        X = X.loc[y.index, :]
         models[label] = ExplainableBoostingClassifier().fit(X,y)
         models_params[label] = models[label].__dict__
 
     return models, models_params
+
+
+def subset_features(X, label):
+    """Returns a subset of features specified in state's input_features parameters
+    Args:
+        X: a Pandas DataFrame.
+        label: The column name of the labels.
+
+    Returns
+        A Pandas DataFrame consisting of a subset of features in X.
+    """
+    input_features = _state.configs["input_features"]
+    if label not in input_features.keys():
+        X = X.iloc[:, :-_state.num_labels]
+    else:
+        X = X.loc[:, input_features[label]]
+    return X
 
 
 def compute_unlabeled_index(new_labeled_index=None, label=None):
@@ -278,7 +296,8 @@ def create_config_file():
             "mode": "Fixed sample size",
             "n_samples": 50,
             "threshold": 0.95
-        }
+        },
+        "input_features": {}
     }
     with open(_CONFIGS_FILE, "w") as _file:
         json.dump(_state.configs, _file, indent=4)
@@ -530,11 +549,10 @@ def sample_and_predict():
         if _state.configs["sidebar"]["num_labels"] != _state.num_labels:
             create_pages()
 
-    X = _state.database.iloc[:, :-_state.num_labels]
-
     _state.local_results = dict.fromkeys(_state.pages)
 
     for label in _state.pages:
+        X = subset_features(_state.database, label)
         if _state.relabel == "No":
             X_unlabeled = X.loc[_state.unlabeled_index[label], :]
         else:
@@ -577,7 +595,7 @@ def update_and_save(label):
     else:
         labeled_index = _state.database.index.difference(_state.unlabeled_index[label])
 
-    X = _state.database.iloc[:, :-_state.num_labels]
+    X = subset_features(_state.database, label)
     X_train = X.loc[labeled_index, :]
     ytrain = _state.database.loc[labeled_index, label]
     ebm = ExplainableBoostingClassifier()
@@ -637,7 +655,7 @@ def generate_explanation(X, label, model):
     except KeyError:
         return
 
-    feature_names = _state.database.columns[:-_state.num_labels]
+    feature_names = X.columns
 
     for sgn_data in data_by_class:
         current_dict = _state.local_results[label]

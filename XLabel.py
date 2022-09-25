@@ -10,6 +10,8 @@ import math
 import os
 import pickle as pkle
 
+from typing import DefaultDict
+
 from interpret.privacy import (DPExplainableBoostingClassifier,
                                DPExplainableBoostingRegressor)
 from interpret.utils import gen_perf_dicts
@@ -60,7 +62,7 @@ def main():
             create_config_file()
 
         _state["loaded_new_file"] = True
-
+    
     st.sidebar.write("Current database: " + _state.configs["db_filename"])
 
     st.sidebar.file_uploader(
@@ -70,7 +72,7 @@ def main():
         accept_multiple_files=False,
         on_change=update_file
         )
-
+    
     with st.sidebar.form("sidebar"):
         st.slider(
             "Number of labels",
@@ -159,8 +161,7 @@ def init_state_params():
         local_results: A dict of outputs of EBM
           used to write predictions and plot heatmaps on screen.
         models: A dict of EBM models to predict the labels.
-        models_params: A dict of models' attributes, which will be
-          saved as a pickle file.
+          the models will be loaded and saved in pickle format.
         predictions: A pandas dataframe; each column contains EBM's
           predictions of each label.
         unlabeled_index: A pandas index of unlabeled rows. When new
@@ -238,11 +239,29 @@ def initialize_models():
     models_params = {}
     for label in _state.pages:
         y = _state.database[label].dropna().map(_state.class_to_num[label])
-        X = _state.database.loc[y.index, :].iloc[:, :-_state.num_labels]
+        X = subset_features(_state.database, label)
+        X = X.loc[y.index, :]
         models[label] = ExplainableBoostingClassifier().fit(X,y)
         models_params[label] = models[label].__dict__
 
     return models, models_params
+
+
+def subset_features(X, label):
+    """Returns a subset of features specified in state's input_features parameters
+    Args:
+        X: a Pandas DataFrame.
+        label: The column name of the labels.
+
+    Returns
+        A Pandas DataFrame consisting of a subset of features in X.
+    """
+    input_features = _state.configs["input_features"]
+    if label not in input_features.keys():
+        X = X.iloc[:, :-_state.num_labels]
+    else:
+        X = X.loc[:, input_features[label]]
+    return X
 
 
 def compute_unlabeled_index(new_labeled_index=None, label=None):
@@ -270,12 +289,13 @@ def create_config_file():
             "mode": "Fixed sample size",
             "n_samples": 50,
             "threshold": 0.95
-        }
+        },
+        "input_features": {}
     }
     with open(_CONFIGS_FILE, "w") as _file:
         json.dump(_state.configs, _file, indent=4)
 
-
+        
 def display_main_screen(label):
     """Display predictions and heatmaps on the main screen.
 
@@ -393,8 +413,8 @@ def plot_all_features(data, title, height, num_rows):
     ).configure_title(fontSize=16)
 
     return obj
-
-
+                        
+                         
 def plot(data, title, height):
     """Plot each row of the heatmap of EBM's per-instance explanation.
 
@@ -488,7 +508,7 @@ def sample_and_predict():
     the predictions and explanations in a dictionary.
     """
     st.experimental_memo.clear()
-
+    
     if _state.loaded_new_file:
         init_state_params()
         _state.loaded_new_file = False
@@ -499,11 +519,10 @@ def sample_and_predict():
         if _state.configs["sidebar"]["num_labels"] != _state.num_labels:
             create_pages()
 
-    X = _state.database.iloc[:, :-_state.num_labels]
-
     _state.local_results = dict.fromkeys(_state.pages)
 
     for label in _state.pages:
+        X = subset_features(_state.database, label)
         if _state.relabel == "No":
             X_unlabeled = X.loc[_state.unlabeled_index[label], :]
         else:
@@ -553,7 +572,7 @@ def update_and_save(label):
     elif (file_ext == ".xlsx") or (file_ext == ".xls"):
         _state.database.to_excel(filename)
 
-    X = _state.database.iloc[:, :-_state.num_labels]
+    X = subset_features(_state.database, label)
     X_train = X.loc[labeled_index, :]
     ytrain = _state.database.loc[labeled_index, label]
     ebm = ExplainableBoostingClassifier()
@@ -611,7 +630,7 @@ def generate_explanation(X, label, model):
     except KeyError:
         return
 
-    feature_names = _state.database.columns[:-_state.num_labels]
+    feature_names = X.columns
 
     for sgn_data in data_by_class:
         current_dict = _state.local_results[label]

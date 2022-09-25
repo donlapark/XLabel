@@ -1,10 +1,37 @@
 {
-    "db_filename": "None",
+    "db_filename": "NCD_synthetic.csv",
     "sidebar": {
         "num_labels": 4,
         "relabel": "Yes",
         "mode": "Fixed sample size",
-        "n_samples": 50,
+        "n_samples": 30,
         "threshold": 0.95
+    },
+    "input_features": {
+        "DM_label": [
+            "DM_key",
+            "DM_ICD10",
+            "DM_drugs",
+            "Glucose",
+            "HbA1c"
+        ],
+        "HTN_label": [
+            "HTN_key",
+            "HTN_ICD10",
+            "HTN_drugs",
+            "sbp1",
+            "dbp1"
+        ],
+        "CKD_label": [
+            "CKD_key",
+            "CKD_ICD10",
+            "eGFR"
+        ],
+        "DLP_label": [
+            "DLP_key",
+            "DLP_ICD10",
+            "AGE",
+            "LDL-c"
+        ]
     }
 }
