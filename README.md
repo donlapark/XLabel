@@ -12,7 +12,7 @@ Try out the app at [<ins>Hugging Face Demo</ins>](https://huggingface.co/spaces/
 
 ## Features
 XLabel can:
-* Predict the most probable labels using Explainable Boosting Machine (EBM) [[1]](#1).
+* Predict the most probable labels using Explainable Boosting Machine (EBM) [[2]](#2).
 * Show the contributions of each feature towards the predicted labels.
 * Provide an option to write the labels directly into the data file (use `XLabel.py`) or save them in a separate file (use `XLabelDL.py`)
 * Work on data mith multiple labels and multiple classes.
@@ -51,13 +51,30 @@ With your data file satisfying these conditions, you can now start data labeling
     * If you are using `XLabel.py`, the labels will be saved directly to the original data file.
     * If you are using `XLabelDL.py`, you need to click the `Download labeled data` in the sidebar to download the labeled data as a new file.
 
-## Citations
-<a id="1">[1]</a> "InterpretML: A Unified Framework for Machine Learning Interpretability" (H. Nori, S. Jenkins, P. Koch, and R. Caruana 2019)
-    ```
+## Citing this work.
+If you use XLabel in your work, please cite:
+
+<a id="1">[1]</a> 
+> Ponnoprat, D., Pattarapanitchai, P., Taninpong, P., & Suantai, S. (2022). An Explainable Machine Learning Approach to Visual-Interactive Labeling: A Case Study on Non-communicable Disease Data. doi:10.48550/ARXIV.2209.12778
+
+    @misc{https://doi.org/10.48550/arxiv.2209.12778,
+    doi = {10.48550/ARXIV.2209.12778},
+    url = {https://arxiv.org/abs/2209.12778},
+    author = {Ponnoprat, Donlapark and Pattarapanitchai, Parichart and Taninpong, Phimphaka and Suantai, Suthep},
+    keywords = {Machine Learning (cs.LG), Human-Computer Interaction (cs.HC), Applications (stat.AP), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
+    title = {An Explainable Machine Learning Approach to Visual-Interactive Labeling: A Case Study on Non-communicable Disease Data},
+    publisher = {arXiv},
+    year = {2022},
+    }
+
+<a id="2">[2]
+></a> "InterpretML: A Unified Framework for Machine Learning Interpretability" (H. Nori, S. Jenkins, P. Koch, and R. Caruana 2019)
+
+
     @article{nori2019interpretml,
       title={InterpretML: A Unified Framework for Machine Learning Interpretability},
       author={Nori, Harsha and Jenkins, Samuel and Koch, Paul and Caruana, Rich},
       journal={arXiv preprint arXiv:1909.09223},
       year={2019}
     }    
-    ```
+
