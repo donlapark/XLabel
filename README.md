@@ -51,7 +51,7 @@ With your data file satisfying these conditions, you can now start data labeling
     * If you are using `XLabel.py`, the labels will be saved directly to the original data file.
     * If you are using `XLabelDL.py`, you need to click the `Download labeled data` in the sidebar to download the labeled data as a new file.
 
-## Citing this work.
+## Citing this work
 If you use XLabel in your work, please cite:
 
 <a id="1">[1]</a> 
