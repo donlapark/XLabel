@@ -36,7 +36,7 @@ Before using XLabel, the data file must follow the following tabular convention:
 * The first row of the file must be the names of the columns.
 * The first column must contain a unique identifier (id) for each row.
 * The label columns must appear last.
-In addition, a few instances must have already been labeled, with each class appearing at least once (For example, if a label has five possible classes, then the required minimum number of labeled instance is 5).
+In addition, a few instances must have already been labeled, with each class appearing at least once (For example, if a label has five possible classes, then the required minimum number of labeled instances is 5).
 
 With your data file satisfying these conditions, you can now start data labeling with XLabel!
 1. Copy `XLabel.py` to the directory that contains the data file and run the `streamlit` command:
