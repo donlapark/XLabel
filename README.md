@@ -15,8 +15,8 @@ XLabel can:
 * Predict the most probable labels using Explainable Boosting Machine (EBM) [[2]](#2).
 * Show the contributions of each feature towards the predicted labels.
 * Provide an option to write the labels directly into the data file (use `XLabel.py`) or save them in a separate file (use `XLabelDL.py`)
-* Work on data mith multiple labels and multiple classes.
-* Work on data with missing values ([thanks to EBM](https://github.com/interpretml/interpret/issues/18)) and/or non-numeric categorical features.
+* Support data with multiple labels and multiple classes.
+* Support data with missing values ([thanks to EBM](https://github.com/interpretml/interpret/issues/18)) and/or non-numeric categorical features.
 
 ![Screenshot](screenshot/XLabel_screenshot.png)
 
