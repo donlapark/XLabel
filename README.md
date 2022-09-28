@@ -8,7 +8,7 @@
 
 XLabel is an open-source [Streamlit](https://streamlit.io/) app that takes an explainable machine learning approach to visual-interactive data labeling.
 
-Try out the app at [<ins>Hugging Face Demo</ins>](https://huggingface.co/spaces/Donlapark/XLabel).
+Try out the app at [<ins>Hugging Face Demo</ins>](https://huggingface.co/spaces/Donlapark/XLabel). No need to upload data!
 
 ## Features
 XLabel can:
