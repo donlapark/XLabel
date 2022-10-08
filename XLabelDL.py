@@ -348,8 +348,13 @@ def display_main_screen(label):
                 these data automatically \n or change the sampling mode to \
                 \"Fixed sample size\".""")
             else:
-                num_heatmap_rows = math.ceil((_state.database.shape[1]
-                                              -_state.num_labels)/_NUM_FEAT_PER_ROW)
+                input_features = _state.configs["input_features"]
+                if label not in input_features.keys():
+                    num_features = _state.database.shape[1] - _state.num_labels
+                else:
+                    num_features = len(input_features[label])
+                num_heatmap_rows = math.ceil(num_features/_NUM_FEAT_PER_ROW)
+
                 for page in _state.local_results[label]:
                     current_plot = plot_all_features(_state.local_results[label][page]['data'],
                                                      title=str(page),
