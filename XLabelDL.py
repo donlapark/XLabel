@@ -228,7 +228,11 @@ def create_pages():
     try:
         with open(file_pre+str(_state.num_labels)+_MODEL
                   , 'rb') as _file:
-            _state["models"] = pkle.load(_file)
+            _state["models_params"] = pkle.load(_file)
+            _state["models"] = {}
+            for label in _state.pages:
+                _state.models[label] = ExplainableBoostingClassifier()
+                _state.models[label].__dict__.update(_state.models_params[label])
     except FileNotFoundError:
         _state["models"], _state["models_params"] = initialize_models()
 
