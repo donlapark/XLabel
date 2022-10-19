@@ -1,4 +1,4 @@
-This folder contains experiments as detailed in [[1]](#1). See `Experiments.ipynb` for the code of the experiments performed on a synthetic dataset `NCD_synthetic.csv`. Note that the results are not exactly the same as shown in the paper as they are derived from the synthetic data.
+This folder contains experiments as detailed in [[1]](#1). See `Experiments.ipynb` for the code of the experiments performed on a synthetic dataset `NCD_synthetic.csv`. Thus the results shown in the notebook are not exactly the same as those in the paper.
 
 
 <a id="1">[1]</a> 
