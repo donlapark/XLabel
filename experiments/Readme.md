@@ -2,8 +2,6 @@ This folder contains experiments as detailed in the paper. See `Experiments.ipyn
 
 To show that the synthetic dataset is a good proxy of the real dataset, we compare their correlation matrices.
 
-### Correlation matrix of the real dataset
-![real_correlation](../screenshot/real_correlation_heatmap.png)
-
-### Correlation matrix of the synthetic dataset
-![synthetic_correlation](../screenshot/synthetic_correlation_heatmap.png)
+Real dataset | Synthetic dataset
+--- | ---
+![real_correlation](../screenshot/real_correlation_heatmap.png) | ![synthetic_correlation](../screenshot/synthetic_correlation_heatmap.png)
