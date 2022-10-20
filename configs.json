@@ -26,12 +26,20 @@
         "CKD_label": [
             "CKD_key",
             "CKD_ICD10",
+            "CKD_drugs",
+            "DM_label",
+            "HTN_label",
             "eGFR"
         ],
         "DLP_label": [
             "DLP_key",
             "DLP_ICD10",
+            "DLP_drugs",
+            "DM_label",
+            "HTN_label",
+            "CKD_label",
             "AGE",
+            "Glucose",
             "LDL-c"
         ]
     }
