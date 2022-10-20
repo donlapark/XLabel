@@ -13,7 +13,8 @@
             "DM_ICD10",
             "DM_drugs",
             "Glucose",
-            "HbA1c"
+            "HbA1c",
+            "eGFR"
         ],
         "HTN_label": [
             "HTN_key",
