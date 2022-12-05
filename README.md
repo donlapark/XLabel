@@ -19,7 +19,7 @@ python3 -m pip install streamlit interpret
 ```
 If you are using Anaconda, first activate an environment and run the following line:
 ```
-conda install streamlit interpret
+conda install streamlit interpret==0.3.0
 ```
 
 ## Usage
