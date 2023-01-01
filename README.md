@@ -2,6 +2,10 @@
 
 XLabel is an open-source [Streamlit](https://streamlit.io/) app that takes an explainable machine learning approach to visual-interactive data labeling.
 
+## News (01/01/2023)
+* Use tabs instead of radio buttons for multiple labels.
+* The app now requires `streamlit>=1.16.0` for the tabs and `interpret>=0.3.0` for handling missing data.
+
 ## Features
 XLabel can:
 * Predict the most probable labels using Explainable Boosting Machine (EBM).
@@ -15,11 +19,11 @@ XLabel can:
 ## Installation
 All you need is installing the required packages, namely [Streamlit](https://streamlit.io/) and [InterpretML](https://github.com/interpretml/interpret).
 ```
-python3 -m pip install streamlit interpret
+python3 -m pip install streamlit>=1.16.0 interpret>=0.3.0
 ```
 If you are using Anaconda, first activate an environment and run the following line:
 ```
-conda install streamlit interpret==0.3.0
+conda install streamlit>=1.16.0 interpret>=0.3.0
 ```
 
 ## Usage
