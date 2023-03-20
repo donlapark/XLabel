@@ -272,7 +272,7 @@ def create_config_file():
         json.dump(_state.configs, _file, indent=4)
 
 
-@st.experimental_memo
+@st.cache_data
 def convert_to_downloadable(data, file_type):
     """Convert a dataframe to a downloadable format
 
@@ -363,7 +363,7 @@ def display_main_screen(label):
                                                   args=(label, ))
 
 
-@st.experimental_memo
+@st.cache_data
 def plot_all_features(data, title, height, num_rows):
     """Plot all rows of the heatmap of EBM's per-instance explanation.
 
@@ -425,7 +425,7 @@ def plot(data, title, height):
     return obj
 
 
-@st.experimental_memo
+@st.cache_data
 def report_results(idx, col_name):
     """Create a list that contains current label (if exists) and confidence score.
 
@@ -454,7 +454,7 @@ def sample_and_predict():
     local explanations. This function calls generate_explanation() to store
     the predictions and explanations in a dictionary.
     """
-    st.experimental_memo.clear()
+    st.cache_data.clear()
 
     if _state.loaded_new_file:
         init_state_params()
