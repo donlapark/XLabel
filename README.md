@@ -26,11 +26,11 @@ XLabel can:
 ## Installation
 All you need is installing the required packages, namely [Streamlit](https://streamlit.io/) and [InterpretML](https://github.com/interpretml/interpret).
 ```
-python3 -m pip install streamlit>=1.16.0 interpret>=0.3.0
+python3 -m pip install streamlit>=1.20.0 interpret>=0.3.2
 ```
 If you are using Anaconda, first activate an environment and run the following line:
 ```
-conda install streamlit>=1.16.0 interpret>=0.3.0
+conda install streamlit>=1.20.0 interpret>=0.3.2
 ```
 
 ## Usage
