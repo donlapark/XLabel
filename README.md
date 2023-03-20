@@ -9,9 +9,8 @@ XLabel is an open-source [Streamlit](https://streamlit.io/) app that takes an ex
 
 Try out the app using your own data at [<ins>Hugging Face Demo</ins>](https://huggingface.co/spaces/Donlapark/XLabel).
 
-## News (01/01/2023)
-* Use tabs instead of radio buttons for multiple labels.
-* The app now requires `streamlit>=1.16.0` for the tabs and `interpret>=0.3.0` for handling missing data.
+## News (03/20/2023)
+* The app now requires `streamlit>=1.20.0` for the tabs and `interpret>=0.3.2`.
 
 ## Features
 XLabel can:
